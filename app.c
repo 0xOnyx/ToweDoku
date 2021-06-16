@@ -96,7 +96,7 @@ void print_game_test(t_header_tower* header, int **game)
     while(heap < (LENGHT_HEADER + 2))
     {
         if(heap == 0 || heap == 5)
-            puts("   ");
+            putchar('\t');
         else
         {
             putchar(' ');
@@ -107,19 +107,32 @@ void print_game_test(t_header_tower* header, int **game)
     }
     putchar('\n');
 
-    heap = 0;
+    int x;
+    int y;
 
-    while(heap < (LENGHT_HEADER +2) )
+    x = 0;
+    y = 0;
+
+    while(x < LENGHT_HEADER )
     {
-        if(heap == 0)
-            
-        else if(heap == 5)
-
-        else
+        while(y < (LENGHT_HEADER + 2))
         {
-            
+            if(y == 0)
+                putchar(header[x].row.left + 48);
+            else if(y == 5)
+                putchar(header[x].row.right + 48);
+            else
+            {
+                putchar(game[x][y] + 48);
+            }
+            putchar(' ');
+            y++;
         }
+        y = 0;
+        putchar('\n');
+        x++;
     }
+
 
 
     heap = 0;
@@ -151,6 +164,7 @@ int create_game(int ***game, int default_Value)
     while(i < LENGHT_HEADER)
     {
         int y;
+        y = 0;
 
         current[i] = malloc(sizeof(int) * LENGHT_HEADER);
 
@@ -180,19 +194,19 @@ int main(int argc, char **argv)
 
     if(argc < 2)
     {
-        puts("Error\n");
+        puts("Error missing arguments\n");
         return 1;
     }
 
     if(create_game(&game, 0) == 0)
     {
-        puts("Error\n");
+        puts("Error to create Game\n");
         return 1;
     }
 
     if(ft_parse(&header, argv[1]) == 0)
     {
-        puts("Error\n");
+        puts("Error to parse\n");
         return 1;
     }
 
