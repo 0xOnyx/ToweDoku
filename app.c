@@ -1,6 +1,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "./src/game.h"
+
 /*          0       1       2       3   4       5           6       7       8      9
 /rush-01 "col1up col2up col3up col4up col1down col2down col3down col4down row1left row2left
 row3left row4left row1right row2right row3right row4right"
@@ -13,17 +16,7 @@ row3left row4left row1right row2right row3right row4right"
 //"4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2"
 //col1up col2up col3up col4up col1down col2down col3down col4down row1left row2left row3left row4left row1right row2right row3right row4right
 
-#define LENGHT_HEADER 4
 
-typedef struct s_position{
-    int left;    //up
-    int right;  //down
-} t_position;
-
-typedef struct s_header_tower{
-    t_position row;
-    t_position col;
-} t_header_tower;
 
 
 int value_from_id(char *arg, int id)
@@ -72,9 +65,9 @@ int ft_parse(t_header_tower **header, char *arg)
     {
         current_value = value_from_id(arg, i);
 
-        if(i > 9)
+        if(i > 11)
             current_header[i % LENGHT_HEADER].row.right = current_value;
-        else if( i > 6)
+        else if( i > 7)
             current_header[i % LENGHT_HEADER].row.left = current_value;
         else if(i > 3)
             current_header[i % LENGHT_HEADER].col.right = current_value;
@@ -156,40 +149,8 @@ void print_game_test(t_header_tower* header, int **game)
         }
         heap++;
     }
+    putchar('\n');
 
-}
-
-
-int create_game(int ***game, int default_Value)
-{
-    int **current;
-    int i;
-    
-    current = malloc(sizeof(int *) * LENGHT_HEADER);
-    i = 0;
-
-    while(i < LENGHT_HEADER)
-    {
-        int y;
-        y = 0;
-
-        current[i] = malloc(sizeof(int) * LENGHT_HEADER);
-
-        if(current[i] == NULL) 
-            return 0;
-        
-        while(y < LENGHT_HEADER)
-        {
-            current[i][y] = default_Value;
-            y++;
-        }
-
-        i++;
-    }
-
-    *game = current;
-
-    return 1;
 }
 
 int main(int argc, char **argv)
@@ -207,24 +168,30 @@ int main(int argc, char **argv)
 
     if(create_game(&game, 0) == 0)
     {
+        ft_free_game(game);
         puts("Error to create Game\n");
         return 1;
     }
 
     if(ft_parse(&header, argv[1]) == 0)
     {
+        free(header);
+        ft_free_game(game);
         puts("Error to parse\n");
         return 1;
     }
 
     print_game_test(header, game);
 
-/*
-    if(ft_find_solution(header, game))
-    {
 
+    if(ft_find_solution(header, game, 0, 0))
+    {
+        free(header);
+        ft_free_game(game);
+        puts("Error no solution found\n");
+        return 1;
     }
-*/
+
 
     free(header);
     return 0;
