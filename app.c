@@ -48,6 +48,7 @@ int value_from_id(char *arg, int id)
 
         i++;
     }   
+    return 7;
 }
 
 int ft_parse(t_header_tower **header, char *arg)
@@ -64,11 +65,12 @@ int ft_parse(t_header_tower **header, char *arg)
 
 
     i = 0;
+// 4 3 2 4   1 2 3 2   4 3 4 1   2 3 7 7
+//"4 3 2 4   1 2 3 2   4 3 0 4   1 2 3 6"
 
     while( i < (LENGHT_HEADER * LENGHT_HEADER) ) 
     {
         current_value = value_from_id(arg, i);
-        printf("%d ", current_value);
 
         if(i > 9)
             current_header[i % LENGHT_HEADER].row.right = current_value;
@@ -91,6 +93,9 @@ void print_game_test(t_header_tower* header, int **game)
 {
     int heap;
 
+    putchar('\n');
+    putchar('\n');
+
     heap = 0;
 
     while(heap < (LENGHT_HEADER + 2))
@@ -99,12 +104,13 @@ void print_game_test(t_header_tower* header, int **game)
             putchar('\t');
         else
         {
-            putchar(' ');
+            
             putchar(header[heap-1].col.left + 48 );
-            putchar(' ');
+            putchar('\t');
         }
         heap++;
     }
+    putchar('\n');
     putchar('\n');
 
     int x;
@@ -125,13 +131,16 @@ void print_game_test(t_header_tower* header, int **game)
             {
                 putchar(game[x][y] + 48);
             }
-            putchar(' ');
+            putchar('\t');
             y++;
         }
         y = 0;
-        putchar('\n');
         x++;
+        putchar('\n');
     }
+
+    putchar('\n');
+    putchar('\n');
 
 
 
@@ -139,13 +148,11 @@ void print_game_test(t_header_tower* header, int **game)
     while(heap < (LENGHT_HEADER + 2))
     {
         if(heap == 0 || heap == 5)
-            puts("   ");
+            putchar('\t');
         else
         {
-            printf("%d", header[heap-1].col.right);
-            putchar(' ');
-            //putchar(header[heap-1].col.right);
-            putchar(' ');
+            putchar(header[heap-1].col.right + 48);
+            putchar('\t');
         }
         heap++;
     }
