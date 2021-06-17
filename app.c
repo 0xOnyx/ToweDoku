@@ -184,7 +184,7 @@ int main(int argc, char **argv)
     print_game_test(header, game);
 
 
-    if(ft_find_solution(header, game, 0, 0))
+    if(ft_find_solution(header, game, 0, 0) == 0)
     {
         free(header);
         ft_free_game(game);
