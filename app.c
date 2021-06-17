@@ -168,7 +168,6 @@ int main(int argc, char **argv)
 
     if(create_game(&game, 0) == 0)
     {
-        ft_free_game(game);
         puts("Error to create Game\n");
         return 1;
     }
@@ -182,6 +181,7 @@ int main(int argc, char **argv)
     }
 
     print_game_test(header, game);
+/*
 
 
     if(ft_find_solution(header, game, 0, 0) == 0)
@@ -192,7 +192,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-
     free(header);
+*/
     return 0;
 }

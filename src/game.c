@@ -7,6 +7,9 @@ int create_game(int ***game, int default_Value)
     int i;
     
     current = malloc(sizeof(int *) * LENGHT_HEADER);
+    if(current == NULL)
+        return 0;
+
     i = 0;
 
     while(i < LENGHT_HEADER)
@@ -27,6 +30,7 @@ int create_game(int ***game, int default_Value)
 
         i++;
     }
+    return 1;
 }
 
 
