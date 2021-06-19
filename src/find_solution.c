@@ -140,7 +140,7 @@ int ft_find_solution(t_header_tower *header, int **game, int x, int y)
 {
         if(ft_check_finish(header, game))
             return 1;
-
+/*
         game[x][y] += 1;
 
         if(ft_test_is_valide(header, game))
@@ -160,5 +160,5 @@ int ft_find_solution(t_header_tower *header, int **game, int x, int y)
         }
         
         ft_find_solution(header, game, x, y);
-
+*/
 }

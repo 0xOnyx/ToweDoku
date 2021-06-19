@@ -7,8 +7,6 @@ int create_game(int ***game, int default_Value)
     int i;
     
     current = malloc(sizeof(int *) * LENGHT_HEADER);
-    if(current == NULL)
-        return 0;
 
     i = 0;
 
@@ -18,9 +16,6 @@ int create_game(int ***game, int default_Value)
         y = 0;
 
         current[i] = malloc(sizeof(int) * LENGHT_HEADER);
-
-        if(current[i] == NULL) 
-            return 0;
         
         while(y < LENGHT_HEADER)
         {
@@ -30,18 +25,22 @@ int create_game(int ***game, int default_Value)
 
         i++;
     }
+    *game = current;
     return 1;
 }
 
 
-void ft_free_game(int **game)
+void ft_free_game(int ***game)
 {
+    int **current;
     int i;
     i = 0;
+    
+    current = *game;
 
     while(i < LENGHT_HEADER )
     {
-        free(game[i]);
+        free(current[i]);
     }
     free(game);
 }

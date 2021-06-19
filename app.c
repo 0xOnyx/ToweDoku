@@ -175,24 +175,22 @@ int main(int argc, char **argv)
     if(ft_parse(&header, argv[1]) == 0)
     {
         free(header);
-        ft_free_game(game);
+        ft_free_game(&game);
         puts("Error to parse\n");
         return 1;
     }
 
     print_game_test(header, game);
-/*
-
 
     if(ft_find_solution(header, game, 0, 0) == 0)
     {
         free(header);
-        ft_free_game(game);
+        ft_free_game(&game);
         puts("Error no solution found\n");
         return 1;
     }
 
     free(header);
-*/
+
     return 0;
 }
