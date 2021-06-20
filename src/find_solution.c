@@ -90,7 +90,7 @@ int check_heigth_col(int value, int *game)
     int i;
 
     i = 0;
-    res = 0;
+    res = 1;
     back = 0;
 
     while(i < LENGHT_HEADER)
@@ -104,7 +104,7 @@ int check_heigth_col(int value, int *game)
     }
 i
     if(res != value)
-        return 1
+        return 1;
 
     return 0;
 }
@@ -132,11 +132,11 @@ int check_is_height(t_header_tower *header, int **game)
 
     i = 0;
 
-    while(i < LENGTH )
+    while(i < LENGHT_HEADER )
     {
-        if(check_height_row(header[i].col.left) )
+        if(check_height_row(header[i].col.left, game, i) )
             return 1;
-        if(check_height_row(header[i].col.right) )
+        if(check_height_row(header[i].col.right, game, i) )
             return 1;
 
         i++;
@@ -150,8 +150,8 @@ int ft_test_is_valide(t_header_tower *header, int **game)
         return 0;
 
 
-    if(check_is_height(t_header_tower *header, int **game))
-        return 0
+    if(check_is_height(header, game))
+        return 0;
 
     return 1;
 
