@@ -83,16 +83,75 @@ int check_is_only(int **game)
     return 0;
 }
 
+int check_heigth_col(int value, int *game)
+{
+    int res;
+    int back;
+    int i;
+
+    i = 0;
+    res = 0;
+    back = 0;
+
+    while(i < LENGHT_HEADER)
+    {
+        if(game[i] > back)
+        {
+            back = game[i];
+            res++;
+        }
+
+    }
+i
+    if(res != value)
+        return 1
+
+    return 0;
+}
+
+int check_height_row(int value, int **game, int positionY)
+{
+    int i;
+    i = 0;
+}
+
+int check_is_height(t_header_tower *header, int **game)
+{
+    int i;
+    i = 0;
+
+    while(i < LENGHT_HEADER)
+    {
+        if(check_height_col(header[i].row.left, game[i]) )
+            return 1;
+        if(check_height_col(header[i].row.right, game[i]) )
+            return 1;
+
+        i++;
+    }
+
+    i = 0;
+
+    while(i < LENGTH )
+    {
+        if(check_height_row(header[i].col.left) )
+            return 1;
+        if(check_height_row(header[i].col.right) )
+            return 1;
+
+        i++;
+    }
+}
+
 
 int ft_test_is_valide(t_header_tower *header, int **game)
 {
     if(check_is_only(game)) //check col and row
         return 0;
 
-/*
-    if(check_is_height(game))
+
+    if(check_is_height(t_header_tower *header, int **game))
         return 0
-*/
 
     return 1;
 
