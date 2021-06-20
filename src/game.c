@@ -32,6 +32,7 @@ int create_game(int ***game, int default_Value)
 
 void ft_free_game(int ***game)
 {
+    
     int **current;
     int i;
     i = 0;
@@ -41,6 +42,7 @@ void ft_free_game(int ***game)
     while(i < LENGHT_HEADER )
     {
         free(current[i]);
+        i++;
     }
-    free(game);
+    free(*game);
 }

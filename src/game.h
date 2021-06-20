@@ -24,4 +24,7 @@ int ft_find_solution(t_header_tower* header, int **game, int x , int y);
 int create_game(int ***game, int default_Value);
 void ft_free_game(int ***game);
 
+void print_game_test(t_header_tower* header, int **game);
+
+
 #endif

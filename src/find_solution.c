@@ -1,4 +1,4 @@
-
+//111448
 
 #include "game.h"
 
@@ -6,48 +6,51 @@
 int check_duplicate_number_array_col(int *array, int size)
 {
     int i;
-    int res;
+    int y;
+
 
     i = 0;
-    res = 0;
+    y = 0;
 
     while(i < size)
     {
-        res = res ^ array[i];
-        i++;
-    }
-    i = 1;
-    while(i <= size)
-    {
-        res = res ^ i;
+        while(y < size)
+        {
+            if(array[i] == array[y] && i != y \
+            && array[i] != 0 && array[y] != 0)
+                return 1;
+            y++;
+        }
+        y = 0;
         i++;
     }
 
-    return res;
+    return 0;
 }
 
 int check_duplicate_number_array_row(int **array, int positionY, int size)
 {
     int i;
-    int res;
+    int y;
+
 
     i = 0;
-    res = 0;
+    y = 0;
 
     while(i < size)
     {
-        res = res ^ array[i][positionY];
+        while(y < size)
+        {
+            if(array[i][positionY] == array[y][positionY] && i != y \
+            && array[i][positionY] != 0 && array[y][positionY] != 0)
+                return 1;
+            y++;
+        }
+        y = 0;
         i++;
     }
-    i = 1;
 
-    while(i <= size)
-    {
-        res = res ^ i;
-        i++;
-    }
-
-    return res;
+    return 0;
 }
 
 int check_is_only(int **game)
@@ -68,8 +71,6 @@ int check_is_only(int **game)
         
         x++;
     }
-    
-    x = 0;
 
     while(y < LENGHT_HEADER)
     {
@@ -92,7 +93,6 @@ int ft_test_is_valide(t_header_tower *header, int **game)
     if(check_is_height(game))
         return 0
 */
-
 
     return 1;
 
@@ -117,6 +117,7 @@ int ft_empty_game(int **game)
                 return 1;
             y++;
         }
+        y = 0;
 
         x++;
     }
@@ -126,39 +127,58 @@ int ft_empty_game(int **game)
 
 int ft_check_finish(t_header_tower *header, int **game)
 {
-    if(ft_empty_game(game) != 1)
+    if(ft_empty_game(game))
         return 0;
     
     if(ft_test_is_valide(header, game) != 1)
         return 0;
     
-
     return 1;
 }
 
+
+
 int ft_find_solution(t_header_tower *header, int **game, int x, int y)
 {
-        if(ft_check_finish(header, game))
-            return 1;
-/*
-        game[x][y] += 1;
+    int i;
+
+    if(ft_check_finish(header, game))
+        return 1;
+
+    i = 1;
+
+    while(i < 5)
+    {
+        game[x][y] = i;
 
         if(ft_test_is_valide(header, game))
         {
+            int tmpX;
+            int tmpY;
 
-            if(x == LENGHT_HEADER)
+            tmpX = x;
+            tmpY = y;
+
+            if(x == LENGHT_HEADER - 1)
             {
-                x = 0;
-                y += 1;
+                tmpX = 0;
+                tmpY += 1;
             }
             else
-            {
-                x += 1;
-            }
+                tmpX += 1;
 
-            ft_find_solution(header, game, x, y);
+            if(ft_find_solution(header, game, tmpX, tmpY ) == 1)
+                return 1;
+
+            game[tmpX][tmpY] = 0;
         }
+
+
         
-        ft_find_solution(header, game, x, y);
-*/
+        i++;
+    }
+
+    return 0;
+
 }
+
